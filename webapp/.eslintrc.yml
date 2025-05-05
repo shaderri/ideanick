@@ -1,0 +1,13 @@
+extends:
+  - react-app # Базовый набор правил для приложений на React
+  - ../.eslintrc.yml # Подключение дополнительных правил из общего конфигурационного файла .eslintrc.yml
+
+parserOptions:
+  project: ./tsconfig.app.json
+  # Указываем основной файл конфигурации TypeScript
+
+overrides:
+  - files:
+      - vite.config.ts # Применяем отдельные правила для файла конфигурации Vite
+    parserOptions:
+      project: ./tsconfig.node.json # Для этих файлов используется другая конфигурация TypeScript
