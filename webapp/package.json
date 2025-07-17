@@ -9,20 +9,28 @@
     "preview": "vite preview",
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
     "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json",
-    "lint": "eslint --cache --cache-location ./node_modules/.eslintcache --ext .ts,.tsx ./src"
+    "lint": "eslint --cache --cache-location ./node_modules/.eslintcache --ext .ts,.tsx ./src",
+    "stylelint": "stylelint --cache --cache-location ./node_modules/.stylelintcache \"src/**/*.scss\""
   },
   "dependencies": {
     "@ideanick/backend": "workspace:*",
     "@tanstack/react-query": "^4.18.0",
     "@trpc/client": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
+    "include-media": "^2.0.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.6.0",
+    "reset-css": "^5.0.2",
+    "sass": "^1.89.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "stylelint": "^16.21.1",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^15.0.1",
     "vite": "^6.0.5"
   }
 }
