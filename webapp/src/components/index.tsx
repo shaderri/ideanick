@@ -15,7 +15,7 @@ export const Segment = ({
     <div className={css.segment}>
       {size === 1 ? <h1 className={css.title}>{title}</h1> : <h2 className={css.title}>{title}</h2>}
       {description && <p className={css.description}>{description}</p>}
-      {children && <p className={css.content}>{children}</p>}
+      {children && <div className={css.content}>{children}</div>}
     </div>
   )
 }

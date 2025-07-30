@@ -10,19 +10,23 @@
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
     "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json",
     "lint": "eslint --cache --cache-location ./node_modules/.eslintcache --ext .ts,.tsx ./src",
-    "stylelint": "stylelint --cache --cache-location ./node_modules/.stylelintcache \"src/**/*.scss\""
+    "stylelint": "stylelint --cache --cache-location ./node_modules/.stylelintcache \"src/**/*.scss\"",
+    "stylecheck": "sass --update -q ./src:./node_modules/.cache/.stylecheckcache"
   },
   "dependencies": {
     "@ideanick/backend": "workspace:*",
     "@tanstack/react-query": "^4.18.0",
     "@trpc/client": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
+    "formik": "^2.4.6",
+    "formik-validator-zod": "^2.2.0",
     "include-media": "^2.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.6.0",
     "reset-css": "^5.0.2",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",

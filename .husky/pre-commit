@@ -1,2 +1,3 @@
 pnpm lint
+pnpm w stylecheck
 pnpm types
