@@ -6,8 +6,10 @@ extends:
 ignorePatterns:
   - node_modules # Игнорируем папку node_modules
   - dist # Игнорируем папку dist (собранные файлы)
-
+plugins:
+  - node # Плагин для работы с Node.js
 rules:
+  no-new: off # Отключение правила, запрещающего использование new без присваивания результата
   # Настройки порядка импорта
   'import/order':
     - error
@@ -64,10 +66,8 @@ rules:
     - skipTemplates: true # Разрешить в шаблонных строках
       skipStrings: true # Разрешить в строковых литералах
 
-  # Запрет на использование console, за исключением указанных методов
-  no-console:
-    - warn
-    - allow:
-        - info # Разрешен console.info
-        - error # Разрешен console.error
-        - warn # Разрешен console.warn
+  node/no-process-env: error # Запрет на использование process.env напрямую
+  no-restricted-syntax:
+    - error
+    - selector: '[object.type=MetaProperty][property.name=env]'
+      message: Use instead import { env } from "lib/env" # Запрет на использование import.meta.env напрямую, используйте import { env } from "lib/env"

@@ -26,9 +26,11 @@ $breakpoint: '<=900px';
     }
 
     .logo {
-      font-weight: bold;
-      font-size: 20px;
-      margin-bottom: 10px;
+      padding-top: 2px;
+      width: 100%;
+      max-width: 130px;
+      height: auto;
+      margin-bottom: 15px;
     }
 
     .menu {
@@ -51,7 +53,6 @@ $breakpoint: '<=900px';
     padding: 20px 30px;
     @include media($breakpoint) {
       overflow: visible;
-      flex: 0 0 auto;
       height: auto;
     }
   }

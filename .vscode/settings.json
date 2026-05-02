@@ -1,6 +1,6 @@
 {
-    "eslint.workingDirectories": [
-        "backend",
-        "webapp"
-    ]
+  "eslint.workingDirectories": ["backend", "webapp", "shared"],
+  "cSpell.enabledFileTypes": {
+    "typescript": true
+  }
 }

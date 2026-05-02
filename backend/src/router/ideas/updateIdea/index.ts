@@ -1,0 +1,40 @@
+import { zUpdateIdeaTrpcInput } from './input'
+import { trpcLoggedProcedure } from '../../../lib/trpc'
+import { CanEditIdea } from '../../../utils/can'
+
+export const updateIdeaTrpcRoute = trpcLoggedProcedure.input(zUpdateIdeaTrpcInput).mutation(async ({ ctx, input }) => {
+  const { ideaId, ...ideaInput } = input
+  if (!ctx.me) {
+    throw new Error('UNAUTHORIZED')
+  }
+  const idea = await ctx.prisma.idea.findUnique({
+    where: {
+      id: ideaId,
+    },
+  })
+  if (!idea) {
+    throw new Error('IDEA_NOT_FOUND')
+  }
+  if (!CanEditIdea(ctx.me, idea)) {
+    throw new Error('NOT_YOUR_IDEA')
+  }
+  if (idea.nick !== input.nick) {
+    const exIdea = await ctx.prisma.idea.findUnique({
+      where: {
+        nick: input.nick,
+      },
+    })
+    if (exIdea) {
+      throw new Error('Idea with this nick already exists')
+    }
+  }
+  await ctx.prisma.idea.update({
+    where: {
+      id: ideaId,
+    },
+    data: {
+      ...ideaInput,
+    },
+  })
+  return true
+})

@@ -1,0 +1,5 @@
+'*.{ts,tsx,js}':
+  - 'eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
+  - 'prettier --loglevel warn --cache --write'
+'*.{json,yml,scss}': 'prettier --loglevel warn --cache --write'
+// Объяснение: Этот файл конфигурации для lint-staged определяет, какие команды должны выполняться при коммите изменений в файлах с определенными расширениями.
