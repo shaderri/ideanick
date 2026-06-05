@@ -1,6 +1,7 @@
 import { zUpdateProfileTrpcInput } from './input'
-import { toClientMe } from '../../lib/models'
-import { trpcLoggedProcedure } from '../../lib/trpc'
+import { ExpectedError } from '../../../lib/error'
+import { toClientMe } from '../../../lib/models'
+import { trpcLoggedProcedure } from '../../../lib/trpc'
 
 export const updateProfileTrpcRoute = trpcLoggedProcedure
   .input(zUpdateProfileTrpcInput)
@@ -15,7 +16,7 @@ export const updateProfileTrpcRoute = trpcLoggedProcedure
         },
       })
       if (exUser) {
-        throw new Error('User with this nick already exists')
+        throw new ExpectedError('User with this nick already exists')
       }
     }
     const updatedMe = await ctx.prisma.user.update({

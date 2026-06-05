@@ -2,12 +2,15 @@ extends:
   # Расширяем базовые конфигурации ESLint
   - standard-with-typescript # Базовый набор правил для TypeScript от StandardJS
   - prettier # Интеграция Prettier для форматирования кода
+  - plugin:jest/recommended # Рекомендуемые правила для Jest
 
 ignorePatterns:
   - node_modules # Игнорируем папку node_modules
   - dist # Игнорируем папку dist (собранные файлы)
+  - '*.config.js' # Игнорируем конфигурационные файлы
 plugins:
   - node # Плагин для работы с Node.js
+  - jest # Плагин для тестирования с Jest
 rules:
   no-new: off # Отключение правила, запрещающего использование new без присваивания результата
   # Настройки порядка импорта

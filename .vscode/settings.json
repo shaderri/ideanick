@@ -1,6 +1,22 @@
 {
-  "eslint.workingDirectories": ["backend", "webapp", "shared"],
+  "eslint.workingDirectories": [
+    {
+      "directory": "backend",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "webapp",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "shared",
+      "changeProcessCWD": true
+    }
+  ],
   "cSpell.enabledFileTypes": {
     "typescript": true
-  }
+  },
+  "eslint.runtime": "/home/shaderri/.nvm/versions/node/v22.13.1/bin/node",
+  "eslint.debug": true,
+  "cSpell.words": ["BREVO", "ideanick", "Noize"]
 }

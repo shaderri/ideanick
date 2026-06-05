@@ -1,13 +1,11 @@
-import { getNewIdeaRoute, getViewIdeaRoute } from '@ideanick/webapp/src/lib/routes'
-import { type Idea, type User } from '@prisma/client'
 import fg from 'fast-glob'
 import { promises as fs } from 'fs'
 import Handlebars from 'handlebars'
 import _ from 'lodash'
 import path from 'path'
 import { env } from 'process'
-import { sendEmailThroughBrevo } from './brevo'
-import { logger } from './logger'
+import { sendEmailThroughBrevo } from '../brevo'
+import { logger } from '../logger'
 
 const getHbrTemplates = _.memoize(async () => {
   const htmlPathsPattern = path.resolve(__dirname, '../emails/dist/**/*.html')
@@ -28,7 +26,7 @@ const getEmailHtml = async (templateName: string, templateVariables: Record<stri
   return html
 }
 
-const sendEmail = async ({
+export const sendEmail = async ({
   to,
   subject,
   templateName,
@@ -61,44 +59,4 @@ const sendEmail = async ({
     })
     return { ok: false }
   }
-}
-
-export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'nick' | 'email'> }) => {
-  return await sendEmail({
-    to: user.email,
-    subject: 'Thanks for registration!',
-    templateName: 'welcome',
-    templateVariables: {
-      userNick: user.nick,
-      addIdeaUrl: `${getNewIdeaRoute({ abs: true })}`,
-    },
-  })
-}
-
-export const sendIdeaBlockedEmail = async ({ user, idea }: { user: Pick<User, 'email'>; idea: Pick<Idea, 'nick'> }) => {
-  return await sendEmail({
-    to: user.email,
-    subject: 'Your idea has been blocked',
-    templateName: 'ideaBlocked',
-    templateVariables: {
-      ideaNick: idea.nick,
-    },
-  })
-}
-
-export const sendMostLikedIdeasEmail = async ({
-  user,
-  ideas,
-}: {
-  user: Pick<User, 'email'>
-  ideas: Array<Pick<Idea, 'nick' | 'name'>>
-}) => {
-  return await sendEmail({
-    to: user.email,
-    subject: 'Most liked ideas of the month',
-    templateName: 'mostLikedIdeas',
-    templateVariables: {
-      ideas: ideas.map((idea) => ({ name: idea.name, url: getViewIdeaRoute({ abs: true, ideaNick: idea.nick }) })),
-    },
-  })
 }

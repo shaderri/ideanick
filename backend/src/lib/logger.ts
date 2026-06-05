@@ -1,3 +1,5 @@
+import { TRPCError } from '@trpc/server'
+import debug from 'debug'
 import _ from 'lodash'
 import { EOL } from 'os'
 import pc from 'picocolors'
@@ -6,6 +8,9 @@ import { MESSAGE } from 'triple-beam'
 import winston from 'winston'
 import * as yaml from 'yaml'
 import { env } from './env'
+import { ExpectedError } from './error'
+import { sentryCaptureException } from './sentry'
+import { deepMap } from '../utils/deepMap'
 
 export const winstonLogger = winston.createLogger({
   level: 'debug',
@@ -58,17 +63,39 @@ export const winstonLogger = winston.createLogger({
   ],
 })
 
+export type LoggerMetaData = Record<string, any> | undefined
+const prettifyMeta = (meta: LoggerMetaData): LoggerMetaData => {
+  return deepMap(meta, ({ key, value }) => {
+    if (['email', 'password', 'newPassword', 'oldPassword', 'token', 'text', 'description'].includes(key)) {
+      return '🙈'
+    }
+    return value
+  })
+}
+
 export const logger = {
-  info: (logType: string, message: string, meta?: Record<string, any>) => {
-    winstonLogger.info(message, { logType, ...meta })
+  info: (logType: string, message: string, meta?: LoggerMetaData) => {
+    if (!debug.enabled(`ideanick:${logType}`)) {
+      return
+    }
+    winstonLogger.info(message, { logType, ...prettifyMeta(meta) })
   },
-  error: (logType: string, error: any, meta?: Record<string, any>) => {
+  error: (logType: string, error: any, meta?: LoggerMetaData) => {
+    const isNativeExpectedError = error instanceof ExpectedError
+    const isTrpcExpectedError = error instanceof TRPCError && error.cause instanceof ExpectedError
+    const prettifiedMetaData = prettifyMeta(meta)
+    if (!isNativeExpectedError && !isTrpcExpectedError) {
+      sentryCaptureException(error, prettifiedMetaData)
+    }
+    if (!debug.enabled(`ideanick:${logType}`)) {
+      return
+    }
     const serializedError = serializeError(error)
     winstonLogger.error(serializedError.message || 'Unknown error', {
       logType,
       error,
       errorStack: serializedError.stack,
-      ...meta,
+      ...prettifiedMetaData,
     })
   },
 }

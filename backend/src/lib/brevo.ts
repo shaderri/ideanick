@@ -12,7 +12,7 @@ const makeRequestToBrevo = async ({
   originalResponse?: AxiosResponse
   loggableResponse: Pick<AxiosResponse, 'status' | 'statusText' | 'data'>
 }> => {
-  if (!env.BREVO_API_KEY) {
+  if (!env.BREVO_API_KEY || env.NODE_ENV === 'test') {
     return {
       loggableResponse: {
         status: 200,
@@ -43,7 +43,7 @@ export const sendEmailThroughBrevo = async ({ to, subject, html }: { to: string;
     data: {
       subject,
       htmlContent: html,
-      sender: { email: env.FROM_EMAIL_ADRESS, name: env.FROM_EMAIL_NAME },
+      sender: { email: env.FROM_EMAIL_ADDRESS, name: env.FROM_EMAIL_NAME },
       to: [{ email: to }],
     },
   })

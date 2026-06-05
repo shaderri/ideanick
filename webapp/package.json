@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "test": "jest",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
@@ -16,9 +17,11 @@
     "@ideanick/backend": "workspace:*",
     "@ideanick/shared": "workspace:*",
     "@nanostores/react": "^1.1.0",
+    "@sentry/react": "^10.53.1",
     "@tanstack/react-query": "^4.18.0",
     "@trpc/client": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
+    "@trpc/server": "^10.45.2",
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
     "formik": "^2.4.6",
@@ -40,8 +43,10 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^5.3.0",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.17",
+    "@types/node": "^22.13.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/react-infinite-scroller": "^1.2.5",
