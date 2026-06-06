@@ -1,16 +1,17 @@
+import { EOL } from 'os'
+import { omit } from '@ideanick/shared/src/omit'
 import { TRPCError } from '@trpc/server'
 import debug from 'debug'
 import _ from 'lodash'
-import { EOL } from 'os'
 import pc from 'picocolors'
 import { serializeError } from 'serialize-error'
 import { MESSAGE } from 'triple-beam'
 import winston from 'winston'
 import * as yaml from 'yaml'
+import { deepMap } from '../utils/deepMap'
 import { env } from './env'
 import { ExpectedError } from './error'
 import { sentryCaptureException } from './sentry'
-import { deepMap } from '../utils/deepMap'
 
 export const winstonLogger = winston.createLogger({
   level: 'debug',
@@ -36,7 +37,7 @@ export const winstonLogger = winston.createLogger({
               const levelAndType = `${logData.level} ${logData.logType}`
               const topMessage = `${setColor(levelAndType)} ${pc.green(String(logData.timestamp))}${EOL}${logData.message}`
 
-              const visibleMessageTags = _.omit(logData, [
+              const visibleMessageTags = omit(logData, [
                 'level',
                 'logType',
                 'timestamp',

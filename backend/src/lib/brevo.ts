@@ -1,6 +1,6 @@
-import axios, { type AxiosResponse } from 'axios'
-import _ from 'lodash'
 import { env } from 'process'
+import { pick } from '@ideanick/shared/pick'
+import axios, { type AxiosResponse } from 'axios'
 
 const makeRequestToBrevo = async ({
   path,
@@ -12,7 +12,7 @@ const makeRequestToBrevo = async ({
   originalResponse?: AxiosResponse
   loggableResponse: Pick<AxiosResponse, 'status' | 'statusText' | 'data'>
 }> => {
-  if (!env.BREVO_API_KEY || env.NODE_ENV === 'test') {
+  if (!env.BREVO_API_KEY) {
     return {
       loggableResponse: {
         status: 200,
@@ -33,7 +33,7 @@ const makeRequestToBrevo = async ({
   })
   return {
     originalResponse: response,
-    loggableResponse: _.pick(response, ['status', 'statusText', 'data']),
+    loggableResponse: pick(response, ['status', 'statusText', 'data']),
   }
 }
 

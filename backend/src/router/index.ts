@@ -4,14 +4,14 @@ import { createTrpcRouter } from '../lib/trpc'
 import { getMeTrpcRoute } from './auth/getMe'
 import { signInTrpcRoute } from './auth/signIn'
 import { signUpTrpcRoute } from './auth/signUp'
+import { updatePasswordTrpcRoute } from './auth/updatePassword'
+import { updateProfileTrpcRoute } from './auth/updateProfile'
 import { blockIdeaTrpcRoute } from './ideas/blockIdea'
 import { createIdeaTrpcRoute } from './ideas/createIdea'
 import { getIdeaTrpcRoute } from './ideas/getIdea'
 import { getIdeasTrpcRoute } from './ideas/getIdeas'
 import { setIdeaLikeTrpcRoute } from './ideas/setIdeaLike'
 import { updateIdeaTrpcRoute } from './ideas/updateIdea'
-import { updatePasswordTrpcRoute } from './updatePassword'
-import { updateProfileTrpcRoute } from './updateProfile'
 // @endindex
 
 export const trpcRouter = createTrpcRouter({

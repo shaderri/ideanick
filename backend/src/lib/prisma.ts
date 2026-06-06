@@ -17,7 +17,7 @@ export const createPrismaClient = () => {
   })
 
   prisma.$on('query', (e) => {
-    logger.info('prisma:low:query', 'Successfull request', {
+    logger.info('prisma:low:query', 'Successful request', {
       query: e.query,
       duration: e.duration,
       params: env.HOST_ENV === 'local' ? e.params : '***',
@@ -37,7 +37,7 @@ export const createPrismaClient = () => {
           try {
             const result = await query(args)
             const durationMs = Date.now() - start
-            logger.info('prisma:high', 'Successfull request', {
+            logger.info('prisma:high', 'Successful request', {
               model,
               operation,
               args,

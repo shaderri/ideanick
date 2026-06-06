@@ -1,16 +1,18 @@
 import '../lib/sentry.mock'
 import '../lib/emails/utils.mock'
+import '../lib/brevo.mock'
 
 import { type Idea, type User } from '@prisma/client'
 import _ from 'lodash'
 import { createAppContext } from '../lib/ctx'
+import { env } from '../lib/env'
 import { getTrpcContext } from '../lib/trpc'
 import { trpcRouter } from '../router'
 import { deepMap } from '../utils/deepMap'
 import { getPasswordHash } from '../utils/getPasswordHash'
 import { type ExpressRequest } from '../utils/types'
 
-if (process.env.NODE_ENV !== 'test') {
+if (env.NODE_ENV !== 'test') {
   throw new Error('Integration tests should be run with NODE_ENV=test')
 }
 
@@ -33,7 +35,7 @@ export const withoutNoize = (input: any): any => {
   return deepMap(input, ({ value }) => {
     if (_.isObject(value) && !_.isArray(value)) {
       return _.entries(value).reduce((acc, [objectKey, objectValue]: [string, any]) => {
-        if ([/^id$/, /Id$/, /At$/].some((regex) => regex.test(objectKey))) {
+        if ([/^id$/, /Id$/, /At$/, /^url$/].some((regex) => regex.test(objectKey))) {
           return acc
         }
         return {

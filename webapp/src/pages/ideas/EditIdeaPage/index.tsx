@@ -1,6 +1,6 @@
 import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/updateIdea/input'
-import { CanEditIdea } from '@ideanick/backend/src/utils/can'
-import pick from 'lodash/pick'
+import { canEditIdea } from '@ideanick/backend/src/utils/can'
+import { pick } from '@ideanick/shared/src/pick'
 import { useNavigate } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
@@ -21,7 +21,7 @@ export const EditIdeaPage = withPageWrapper({
   },
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const idea = checkExists(queryResult.data.idea, 'Idea not found')
-    checkAccess(CanEditIdea(ctx.me, idea), 'An idea can only be edited by the author')
+    checkAccess(canEditIdea(ctx.me, idea), 'An idea can only be edited by the author')
     return { idea }
   },
   title: ({ idea }) => `Edit Idea: "${idea.name}"`,

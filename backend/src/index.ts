@@ -12,8 +12,6 @@ import { applyTrpcToExpressApp } from './lib/trpc'
 import { trpcRouter } from './router'
 import { presetDb } from './scripts/presetDb'
 
-const x: string = 123
-
 void (async () => {
   let ctx: AppContext | null = null
   try {
@@ -26,6 +24,7 @@ void (async () => {
     })
     applyPassportToExpressApp(expressApp, ctx)
     expressApp.use(corm())
+
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
     applyCron(ctx)
     expressApp.use((error: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
