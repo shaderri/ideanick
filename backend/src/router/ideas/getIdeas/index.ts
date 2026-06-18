@@ -1,4 +1,4 @@
-import { omit } from '@ideanick/shared/omit'
+import { omit } from '@ideanick/shared/src/omit'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zGetIdeasTrpcInput } from './input'
 

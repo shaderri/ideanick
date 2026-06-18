@@ -7,10 +7,10 @@ export const hasPermission = (user: MaybeUser, permission: UserPermission) => {
   return user?.permissions.includes(permission) || user?.permissions.includes('ALL') || false
 }
 
-export const canBlockIdeas = (user: MaybeUser) => {
+export const CanBlockIdeas = (user: MaybeUser) => {
   return hasPermission(user, 'BLOCK_IDEAS')
 }
 
-export const canEditIdea = (user: MaybeUser, idea: MaybeIdea) => {
+export const CanEditIdea = (user: MaybeUser, idea: MaybeIdea) => {
   return !!user && !!idea && user?.id === idea?.authorId
 }

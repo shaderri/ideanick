@@ -5,10 +5,10 @@
   },
   "compilerOptions": {
     "types": ["node", "jest"],
-    // "plugins": [{ "transform": "typescript-transform-paths" }],
+    "plugins": [{ "transform": "typescript-transform-paths" }],
     "paths": {
       "@ideanick/webapp/*": ["../webapp/*"],
-      "@ideanick/shared/*": ["../shared/src/*"]
+      "@ideanick/shared/*": ["../shared/*"]
     },
     "outDir": "./dist",
     "rootDir": "..",

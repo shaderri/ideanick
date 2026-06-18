@@ -1,11 +1,11 @@
-import { zBlockIdeaTrpcInput } from './input'
 import { sendIdeaBlockedEmail } from '../../../lib/emails'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
-import { canBlockIdeas } from '../../../utils/can'
+import { CanBlockIdeas } from '../../../utils/can'
+import { zBlockIdeaTrpcInput } from './input'
 
 export const blockIdeaTrpcRoute = trpcLoggedProcedure.input(zBlockIdeaTrpcInput).mutation(async ({ input, ctx }) => {
   const { ideaId } = input
-  if (!canBlockIdeas(ctx.me)) {
+  if (!CanBlockIdeas(ctx.me)) {
     throw new Error('PERMISSION_DENIED')
   }
   const idea = await ctx.prisma.idea.findUnique({

@@ -4,10 +4,10 @@ import { type Express } from 'express'
 import superjson from 'superjson'
 import { expressHandler } from 'trpc-playground/handlers/express'
 import { type TrpcRouter } from '../router'
+import { type ExpressRequest } from '../utils/types'
 import { type AppContext } from './ctx'
 import { ExpectedError } from './error'
 import { logger } from './logger'
-import { type ExpressRequest } from '../utils/types'
 
 export const getTrpcContext = ({ appContext, req }: { appContext: AppContext; req: ExpressRequest }) => ({
   ...appContext,

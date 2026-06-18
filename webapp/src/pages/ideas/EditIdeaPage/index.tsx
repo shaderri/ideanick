@@ -1,5 +1,5 @@
 import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/updateIdea/input'
-import { canEditIdea } from '@ideanick/backend/src/utils/can'
+import { CanEditIdea } from '@ideanick/backend/src/utils/can'
 import { pick } from '@ideanick/shared/src/pick'
 import { useNavigate } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
@@ -8,6 +8,7 @@ import { FormItems } from '../../../components/FormItems'
 import { Input } from '../../../components/Input'
 import { Segment } from '../../../components/Segment'
 import { Textarea } from '../../../components/Textarea'
+import { UploadsToCloudinary } from '../../../components/UploadsToCloudinary'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getEditIdeaRoute, getViewIdeaRoute } from '../../../lib/routes'
@@ -21,7 +22,7 @@ export const EditIdeaPage = withPageWrapper({
   },
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const idea = checkExists(queryResult.data.idea, 'Idea not found')
-    checkAccess(canEditIdea(ctx.me, idea), 'An idea can only be edited by the author')
+    checkAccess(CanEditIdea(ctx.me, idea), 'An idea can only be edited by the author')
     return { idea }
   },
   title: ({ idea }) => `Edit Idea: "${idea.name}"`,
@@ -29,7 +30,7 @@ export const EditIdeaPage = withPageWrapper({
   const navigate = useNavigate()
   const UpdateIdea = trpc.updateIdea.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
-    initialValues: pick(idea, ['name', 'nick', 'description', 'text']),
+    initialValues: pick(idea, ['name', 'nick', 'description', 'text', 'images']),
     validationSchema: zUpdateIdeaTrpcInput.omit({ ideaId: true }),
     onSubmit: async (values) => {
       await UpdateIdea.mutateAsync({ ideaId: idea.id, ...values })
@@ -47,6 +48,7 @@ export const EditIdeaPage = withPageWrapper({
           <Input name="nick" label="Nick" formik={formik} />
           <Input name="description" label="Description" maxWidth={500} formik={formik} />
           <Textarea name="text" label="Text" formik={formik} />
+          <UploadsToCloudinary name="images" label="Images" formik={formik} type="image" preset="preview" />
           <Alert {...alertProps} />
           <Button {...buttonProps}>Update Idea</Button>
         </FormItems>

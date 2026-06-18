@@ -55,3 +55,11 @@
 .editButton {
   margin-top: 20pxs;
 }
+
+.buttons {
+  margin-right: -5px;
+
+  & > * {
+    margin-right: 5px;
+  }
+}

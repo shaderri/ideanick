@@ -1,9 +1,9 @@
-import { zSignUpTrpcInput } from './input'
 import { sendWelcomeEmail } from '../../../lib/emails'
 import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { getPasswordHash } from '../../../utils/getPasswordHash'
 import { signJWT } from '../../../utils/signJWT'
+import { zSignUpTrpcInput } from './input'
 
 export const signUpTrpcRoute = trpcLoggedProcedure.input(zSignUpTrpcInput).mutation(async ({ ctx, input }) => {
   const exUserWithNick = await ctx.prisma.user.findUnique({
@@ -31,5 +31,5 @@ export const signUpTrpcRoute = trpcLoggedProcedure.input(zSignUpTrpcInput).mutat
   })
   void sendWelcomeEmail({ user })
   const token = signJWT(user.id)
-  return { token }
+  return { token, userId: user.id }
 })

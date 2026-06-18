@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { NotAuthRouteTracker } from './components/NonAuthRouteTracker'
 import { AppContextProvider } from './lib/ctx'
+import { MixpanelUser } from './lib/mixpanel'
 import * as routes from './lib/routes'
 import { SentryUser } from './lib/sentry'
 import { TrpcProvider } from './lib/trpc'
@@ -23,6 +24,7 @@ export const App = () => {
       <TrpcProvider>
         <AppContextProvider>
           <BrowserRouter>
+            <MixpanelUser />
             <SentryUser />
             <NotAuthRouteTracker />
             <Routes>

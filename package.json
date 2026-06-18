@@ -11,6 +11,9 @@
     "types": "concurrently \"pnpm b types\" \"pnpm w types\"",
     "prettify": "pnpm -r --parallel prettify",
     "lint": "concurrently --raw --success first \"pnpm b lint\" \"pnpm w lint\"",
+    "dcc": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- bash -c 'docker compose config'",
+    "dcb": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- bash -c 'docker compose build'",
+    "dcu": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- bash -c 'docker compose up'",
     "prepare": "husky"
   },
   "pnpm": {
@@ -24,7 +27,6 @@
     "@typescript-eslint/parser": "^5.62.0",
     "concurrently": "^9.1.2",
     "copyfiles": "^2.4.1",
-    "cross-env": "^10.1.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-react-app": "^7.0.1",
@@ -48,6 +50,8 @@
     "typescript-transform-paths": "^3.5.6"
   },
   "dependencies": {
-    "superjson": "1.13.3"
+    "node": "22.13.1",
+    "dotenv-cli": "^11.0.0",
+    "cross-env": "^10.1.0"
   }
 }

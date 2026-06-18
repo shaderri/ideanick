@@ -11,11 +11,12 @@
     "build-ts": "rimraf ./dist && tsc --build ./tsconfig.build.json",
     "build": "pnpm build-ts && pnpm build-emails && pnpm copy-emails",
     "sentry-release": "dotenv -- bash -c 'sentry-cli releases new ${SOURCE_VERSION} --finalize --org ideanick-i3 --project backend --auth-token ${SENTRY_AUTH_TOKEN}'",
-    "sentry-sourcemaps": "dotenv -- bash -c 'sentry-cli releases files ${SOURCE_VERSION} upload-sourcemaps ./dist --org ideanick-i3 --project backend'",
+    "sentry-sourcemaps": "dotenv -- bash -c 'sentry-cli sourcemaps upload ./dist --release ${SOURCE_VERSION} --org ideanick-i3 --project backend'",
     "sentry": "pnpm sentry-release && pnpm sentry-sourcemaps",
     "start": "cross-env NODE_ENV=production node ./dist/backend/src/index.js",
     "pmd": "prisma migrate dev",
     "pmt": "dotenv -e ./.env.test prisma migrate deploy",
+    "pmp": "dotenv -e ./.env.production prisma migrate deploy",
     "pgc": "prisma generate",
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
     "types": "tsc --noEmit --project ./tsconfig.json",
@@ -51,6 +52,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "picocolors": "^1.1.1",
+    "prisma": "^6.13.0",
     "react": "18",
     "react-dom": "18",
     "react-router-dom": "^7.6.0",
@@ -74,8 +76,6 @@
     "@types/passport": "^1.0.17",
     "@types/passport-jwt": "^4.0.1",
     "@types/triple-beam": "^1.3.5",
-    "dotenv-cli": "^11.0.0",
-    "eslint-plugin-node": "^11.1.0",
-    "prisma": "^6.13.0"
+    "eslint-plugin-node": "^11.1.0"
   }
 }

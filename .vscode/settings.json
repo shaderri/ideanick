@@ -16,7 +16,6 @@
   "cSpell.enabledFileTypes": {
     "typescript": true
   },
-  "eslint.runtime": "/home/shaderri/.nvm/versions/node/v22.13.1/bin/node",
-  "eslint.debug": true,
-  "cSpell.words": ["BREVO", "ideanick", "Noize"]
+  "cSpell.words": ["BREVO", "ideanick", "Noize"],
+  "prisma.pinToPrisma6": true
 }

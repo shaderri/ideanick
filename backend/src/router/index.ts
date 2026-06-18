@@ -12,6 +12,7 @@ import { getIdeaTrpcRoute } from './ideas/getIdea'
 import { getIdeasTrpcRoute } from './ideas/getIdeas'
 import { setIdeaLikeTrpcRoute } from './ideas/setIdeaLike'
 import { updateIdeaTrpcRoute } from './ideas/updateIdea'
+import { prepareCloudinaryUploadTrpcRoute } from './upload/prepareCloudinaryUpload'
 // @endindex
 
 export const trpcRouter = createTrpcRouter({
@@ -19,14 +20,15 @@ export const trpcRouter = createTrpcRouter({
   getMe: getMeTrpcRoute,
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
+  updatePassword: updatePasswordTrpcRoute,
+  updateProfile: updateProfileTrpcRoute,
   blockIdea: blockIdeaTrpcRoute,
   createIdea: createIdeaTrpcRoute,
   getIdea: getIdeaTrpcRoute,
   getIdeas: getIdeasTrpcRoute,
   setIdeaLike: setIdeaLikeTrpcRoute,
   updateIdea: updateIdeaTrpcRoute,
-  updatePassword: updatePasswordTrpcRoute,
-  updateProfile: updateProfileTrpcRoute,
+  prepareCloudinaryUpload: prepareCloudinaryUploadTrpcRoute,
   // @endindex
 })
 export type TrpcRouter = typeof trpcRouter

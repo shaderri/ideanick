@@ -1,7 +1,7 @@
 import { createRef } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import css from './index.module.scss'
-import Logo from '../../Assets/images/logo.svg?react'
+import Logo from '../../assets/images/logo.svg?react'
 import { useMe } from '../../lib/ctx'
 import {
   getAllIdeasRoute,

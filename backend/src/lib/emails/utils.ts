@@ -1,14 +1,14 @@
-import fg from 'fast-glob'
 import { promises as fs } from 'fs'
-import Handlebars from 'handlebars'
-import _ from 'lodash'
 import path from 'path'
 import { env } from 'process'
+import fg from 'fast-glob'
+import Handlebars from 'handlebars'
+import _ from 'lodash'
 import { sendEmailThroughBrevo } from '../brevo'
 import { logger } from '../logger'
 
 const getHbrTemplates = _.memoize(async () => {
-  const htmlPathsPattern = path.resolve(__dirname, '../emails/dist/**/*.html')
+  const htmlPathsPattern = path.resolve(__dirname, '../../emails/dist/**/*.html')
   const htmlPaths = fg.sync(htmlPathsPattern)
   const hbrTemplates: Record<string, HandlebarsTemplateDelegate> = {}
   for (const htmlPath of htmlPaths) {

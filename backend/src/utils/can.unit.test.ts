@@ -1,4 +1,4 @@
-import { canEditIdea, hasPermission } from './can'
+import { CanEditIdea, hasPermission } from './can'
 
 describe('can', () => {
   it('hasPermission return true for user with this permission', () => {
@@ -38,7 +38,7 @@ describe('can', () => {
   })
 
   it('only author can edit his idea', () => {
-    expect(canEditIdea({ permissions: [], id: 'x' }, { authorId: 'x' })).toBe(true)
-    expect(canEditIdea({ permissions: [], id: 'hacker' }, { authorId: 'x' })).toBe(false)
+    expect(CanEditIdea({ permissions: [], id: 'x' }, { authorId: 'x' })).toBe(true)
+    expect(CanEditIdea({ permissions: [], id: 'hacker' }, { authorId: 'x' })).toBe(false)
   })
 })

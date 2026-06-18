@@ -1,8 +1,8 @@
-import { zSignInTrpcInput } from './input'
 import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { getPasswordHash } from '../../../utils/getPasswordHash'
 import { signJWT } from '../../../utils/signJWT'
+import { zSignInTrpcInput } from './input'
 
 export const signInTrpcRoute = trpcLoggedProcedure.input(zSignInTrpcInput).mutation(async ({ ctx, input }) => {
   const user = await ctx.prisma.user.findFirst({
@@ -15,5 +15,5 @@ export const signInTrpcRoute = trpcLoggedProcedure.input(zSignInTrpcInput).mutat
     throw new ExpectedError('Wrong nick or password')
   }
   const token = signJWT(user.id)
-  return { token }
+  return { token, userId: user.id }
 })

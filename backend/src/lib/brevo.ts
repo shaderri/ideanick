@@ -1,5 +1,5 @@
 import { env } from 'process'
-import { pick } from '@ideanick/shared/pick'
+import { pick } from '@ideanick/shared/src/pick'
 import axios, { type AxiosResponse } from 'axios'
 
 const makeRequestToBrevo = async ({

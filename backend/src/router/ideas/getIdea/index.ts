@@ -1,4 +1,4 @@
-import { omit } from '@ideanick/shared/omit'
+import { omit } from '@ideanick/shared/src/omit'
 import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zGetIdeaTrpcInput } from './input'
@@ -14,6 +14,7 @@ export const getIdeaTrpcRoute = trpcLoggedProcedure.input(zGetIdeaTrpcInput).que
           id: true,
           nick: true,
           name: true,
+          avatar: true,
         },
       },
       ideasLikes: {

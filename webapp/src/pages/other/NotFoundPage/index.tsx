@@ -1,5 +1,5 @@
 import css from './index.module.scss'
-import image404 from '../../../../src/Assets/images/404.png'
+import image404 from '../../../../src/assets/images/404.png'
 import { ErrorPageComponent } from '../../../components/ErrorPageComponent'
 
 export const NotFoundPage = ({
