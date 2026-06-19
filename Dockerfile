@@ -14,7 +14,6 @@ ARG NODE_ENV=production
 ARG SENTRY_AUTH_TOKEN
 ARG SOURCE_VERSION
 
-RUN pnpm b prepare
 RUN pnpm b pgc
 RUN pnpm b build
 RUN pnpm b sentry
