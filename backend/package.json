@@ -21,7 +21,7 @@
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "lint": "eslint --cache --cache-location ./node_modules/.eslintcache --ext .ts ./src",
-    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; fi"
+    "prepare": ""
   },
   "prisma": {
     "schema": "./src/prisma/schema.prisma"
