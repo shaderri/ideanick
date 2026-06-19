@@ -8,7 +8,7 @@
     "build-emails": "rimraf ./src/emails/dist && mkdir ./src/emails/dist && mjml ./src/emails/[!_]*.mjml -o ./src/emails/dist",
     "watch-emails": "mjml -w ./src/emails/[!_]*.mjml -o ./src/emails/dist",
     "copy-emails": "copyfiles ./src/emails/dist/*.html ./dist/backend",
-    "build-ts": "rimraf ./dist && tsc --build ./tsconfig.build.json",
+    "build-ts": "rimraf ./dist && tsc --build ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json",
     "build": "pnpm build-ts && pnpm build-emails && pnpm copy-emails",
     "sentry-release": "dotenv -- bash -c 'sentry-cli releases new ${SOURCE_VERSION} --finalize --org ideanick-i3 --project backend --auth-token ${SENTRY_AUTH_TOKEN}'",
     "sentry-sourcemaps": "dotenv -- bash -c 'sentry-cli sourcemaps upload ./dist --release ${SOURCE_VERSION} --org ideanick-i3 --project backend'",
@@ -76,6 +76,7 @@
     "@types/passport": "^1.0.17",
     "@types/passport-jwt": "^4.0.1",
     "@types/triple-beam": "^1.3.5",
-    "eslint-plugin-node": "^11.1.0"
+    "eslint-plugin-node": "^11.1.0",
+    "tsc-alias": "^1.8.17"
   }
 }
