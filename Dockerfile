@@ -33,7 +33,7 @@ COPY --from=0 /app/shared/package.json /app/shared/package.json
 COPY --from=0 /app/webapp/dist /app/webapp/dist
 COPY --from=0 /app/backend/dist /app/backend/dist
 COPY --from=0 /app/backend/src/prisma /app/backend/src/prisma
-COPY --from=0 /app/shared/src /app/shared/src
+COPY --from=0 /app/backend/dist/shared /app/backend/dist/shared
 
 WORKDIR /app
 
